@@ -34,15 +34,37 @@
 
         .heart-frame {
             position: absolute;
-            opacity: 0.3;
+            opacity: 0.4;
             animation: float 15s infinite;
+            filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.2));
+        }
+
+        .heart-frame::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #ff6b9d;
+            clip-path: polygon(
+                50% 15%,
+                61% 6%, 74% 0%, 85% 2%, 92% 8%, 97% 16%, 99% 26%, 98% 36%, 94% 46%,
+                87% 56%, 78% 65%, 67% 73%, 55% 80%, 50% 85%,
+                45% 80%, 33% 73%, 22% 65%, 13% 56%, 6% 46%, 2% 36%, 1% 26%, 3% 16%, 8% 8%, 15% 2%, 26% 0%, 39% 6%
+            );
         }
 
         .heart-frame img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            clip-path: path('M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z');
+            clip-path: polygon(
+                50% 15%,
+                61% 6%, 74% 0%, 85% 2%, 92% 8%, 97% 16%, 99% 26%, 98% 36%, 94% 46%,
+                87% 56%, 78% 65%, 67% 73%, 55% 80%, 50% 85%,
+                45% 80%, 33% 73%, 22% 65%, 13% 56%, 6% 46%, 2% 36%, 1% 26%, 3% 16%, 8% 8%, 15% 2%, 26% 0%, 39% 6%
+            );
         }
 
         @keyframes float {
@@ -51,10 +73,10 @@
                 opacity: 0;
             }
             10% {
-                opacity: 0.3;
+                opacity: 0.4;
             }
             90% {
-                opacity: 0.3;
+                opacity: 0.4;
             }
             100% {
                 transform: translateY(-100vh) rotate(360deg);
@@ -188,7 +210,7 @@
             
             // Array of your picture URLs - ADD YOUR PICTURE PATHS HERE
             const pictures = [
-                'photo 1.jpg',  // Replace with your actual image paths
+               'photo 1.jpg',  // Replace with your actual image paths
                 'photo 2.jpg',
                 'photo 3.jpg',
                 'photo 4.jpg',
@@ -199,7 +221,7 @@
                 'photo 9.jpg'
             ];
             
-            for (let i = 0; i < 6; i++) {
+            for (let i = 0; i < 8; i++) {
                 const heartFrame = document.createElement('div');
                 heartFrame.className = 'heart-frame';
                 
@@ -212,7 +234,7 @@
                 // Random positioning and sizing
                 heartFrame.style.left = Math.random() * 100 + '%';
                 heartFrame.style.animationDelay = Math.random() * 10 + 's';
-                const size = 500; // 500px large hearts
+                const size = 250; // 250px hearts
                 heartFrame.style.width = size + 'px';
                 heartFrame.style.height = size + 'px';
                 
