@@ -21,7 +21,7 @@
             background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 50%, #ffecd2 100%);
         }
 
-        /* Floating hearts background */
+        /* Floating hearts background with images */
         .heart-bg {
             position: fixed;
             top: 0;
@@ -32,11 +32,17 @@
             z-index: 0;
         }
 
-        .heart {
+        .heart-frame {
             position: absolute;
-            font-size: 20px;
             opacity: 0.3;
-            animation: float 10s infinite;
+            animation: float 15s infinite;
+        }
+
+        .heart-frame img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            clip-path: path('M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z');
         }
 
         @keyframes float {
@@ -44,7 +50,10 @@
                 transform: translateY(100vh) rotate(0deg);
                 opacity: 0;
             }
-            50% {
+            10% {
+                opacity: 0.3;
+            }
+            90% {
                 opacity: 0.3;
             }
             100% {
@@ -163,7 +172,7 @@
     <div class="celebration">
         <div class="love-image">
             <!-- Replace 'YOUR_IMAGE_URL_HERE' with your actual image URL or path -->
-            <img src="photo.jpg">
+            <img src="YOUR_IMAGE_URL_HERE" alt="Love" id="loveImage">
         </div>
         <h1>Of course you would, there's literally no one else but me!</h1>
         <p class="celebration-text">
@@ -173,19 +182,38 @@
     </div>
 
     <script>
-        // Create floating hearts
+        // Create floating heart-shaped pictures
         function createFloatingHearts() {
             const heartBg = document.getElementById('heartBg');
-            const hearts = ['💕', '💖', '💗', '💓', '💝', '❤️'];
             
-            for (let i = 0; i < 15; i++) {
-                const heart = document.createElement('div');
-                heart.className = 'heart';
-                heart.textContent = hearts[Math.floor(Math.random() * hearts.length)];
-                heart.style.left = Math.random() * 100 + '%';
-                heart.style.animationDelay = Math.random() * 10 + 's';
-                heart.style.fontSize = (Math.random() * 20 + 15) + 'px';
-                heartBg.appendChild(heart);
+            // Array of your picture URLs - ADD YOUR PICTURE PATHS HERE
+            const pictures = [
+                'picture1.jpg',  // Replace with your actual image paths
+                'picture2.jpg',
+                'picture3.jpg',
+                'picture4.jpg',
+                'picture5.jpg',
+                'picture6.jpg'
+            ];
+            
+            for (let i = 0; i < 6; i++) {
+                const heartFrame = document.createElement('div');
+                heartFrame.className = 'heart-frame';
+                
+                const img = document.createElement('img');
+                img.src = pictures[i % pictures.length]; // Cycles through your pictures
+                img.alt = 'Memory';
+                
+                heartFrame.appendChild(img);
+                
+                // Random positioning and sizing
+                heartFrame.style.left = Math.random() * 100 + '%';
+                heartFrame.style.animationDelay = Math.random() * 10 + 's';
+                const size = 500; // 500px large hearts
+                heartFrame.style.width = size + 'px';
+                heartFrame.style.height = size + 'px';
+                
+                heartBg.appendChild(heartFrame);
             }
         }
 
