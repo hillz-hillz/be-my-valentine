@@ -121,87 +121,13 @@
             background: linear-gradient(135deg, #d0d0d0 0%, #e5e5e5 100%);
         }
 
-        /* Celebration page */
-        .celebration {
-            display: none;
-            position: relative;
-            z-index: 1;
-            text-align: center;
-            background: rgba(255, 255, 255, 0.95);
-            padding: 40px 30px;
-            border-radius: 30px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
-            max-width: 600px;
-            width: 90%;
-            margin: 20px auto;
-        }
-
-        .celebration h1 {
-            font-size: 2.8em;
-            margin-bottom: 20px;
-        }
-
-        .celebration-text {
-            font-size: 1.3em;
-            color: #555;
-            margin-bottom: 30px;
-            line-height: 1.6;
-        }
-
-        .love-image {
-            width: 200px;
-            height: 200px;
-            margin: 0 auto 30px;
-            background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 100%);
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 100px;
-            box-shadow: 0 10px 30px rgba(255, 107, 157, 0.3);
-            overflow: hidden;
-            position: relative;
-        }
-
-        .love-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        /* Fireworks */
-        .firework {
-            position: fixed;
-            pointer-events: none;
-            z-index: 999;
-        }
-
-        .firework-spark {
-            position: absolute;
-            width: 4px;
-            height: 4px;
-            border-radius: 50%;
-            animation: spark 1s ease-out forwards;
-        }
-
-        @keyframes spark {
-            0% {
-                transform: translate(0, 0);
-                opacity: 1;
-            }
-            100% {
-                transform: translate(var(--x), var(--y));
-                opacity: 0;
-            }
-        }
-
         .emoji {
             font-size: 1.2em;
         }
 
         /* Mobile responsive styles */
         @media (max-width: 768px) {
-            .container, .celebration {
+            .container {
                 padding: 30px 20px;
             }
 
@@ -211,20 +137,6 @@
 
             .question {
                 font-size: 1.2em;
-            }
-
-            .celebration h1 {
-                font-size: 1.8em;
-                line-height: 1.3;
-            }
-
-            .celebration-text {
-                font-size: 1.1em;
-            }
-
-            .love-image {
-                width: 150px;
-                height: 150px;
             }
 
             button {
@@ -252,19 +164,6 @@
         </div>
     </div>
 
-    <!-- Celebration page -->
-    <div class="celebration" id="celebrationPage">
-        <div class="love-image">
-            <!-- Replace 'YOUR_IMAGE_URL_HERE' with your actual image URL or path -->
-            <img src="photo.jpg" alt="Love" id="loveImage">
-        </div>
-        <h1>Of course you would, there's literally no one else but me!</h1>
-        <p class="celebration-text">
-            I love you so much, baby! <span class="emoji">❤️</span><br>
-            You make every day feel like Valentine's Day! <span class="emoji">✨</span>
-        </p>
-    </div>
-
     <script>
         // Create floating hearts
         function createFloatingHearts() {
@@ -287,8 +186,6 @@
         // Button functionality
         const yesBtn = document.getElementById('yesBtn');
         const noBtn = document.getElementById('noBtn');
-        const questionPage = document.getElementById('questionPage');
-        const celebrationPage = document.getElementById('celebrationPage');
 
         let noClickCount = 0;
         const scaleFactor = 1.15;
@@ -313,48 +210,9 @@
         });
 
         yesBtn.addEventListener('click', () => {
-            questionPage.style.display = 'none';
-            celebrationPage.style.display = 'block';
-            
-            // Create fireworks
-            for (let i = 0; i < 10; i++) {
-                setTimeout(() => createFirework(), i * 300);
-            }
+            // Redirect to celebration page
+            window.location.href = 'celebration.html';
         });
-
-        function createFirework() {
-            const firework = document.createElement('div');
-            firework.className = 'firework';
-            
-            const x = Math.random() * window.innerWidth;
-            const y = Math.random() * window.innerHeight * 0.7;
-            
-            firework.style.left = x + 'px';
-            firework.style.top = y + 'px';
-            
-            const colors = ['#ff6b9d', '#ff8fab', '#ffd6e0', '#ffb6c1', '#ff69b4', '#ff1493'];
-            const sparkCount = 20;
-            
-            for (let i = 0; i < sparkCount; i++) {
-                const spark = document.createElement('div');
-                spark.className = 'firework-spark';
-                spark.style.background = colors[Math.floor(Math.random() * colors.length)];
-                
-                const angle = (Math.PI * 2 * i) / sparkCount;
-                const velocity = 100 + Math.random() * 100;
-                const xVel = Math.cos(angle) * velocity;
-                const yVel = Math.sin(angle) * velocity;
-                
-                spark.style.setProperty('--x', xVel + 'px');
-                spark.style.setProperty('--y', yVel + 'px');
-                
-                firework.appendChild(spark);
-            }
-            
-            document.body.appendChild(firework);
-            
-            setTimeout(() => firework.remove(), 1000);
-        }
     </script>
 </body>
 </html>
