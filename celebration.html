@@ -69,17 +69,20 @@
 
         @keyframes float {
             0% {
-                transform: translateY(100vh) rotate(0deg);
+                transform: translateY(100vh) translateX(0) rotate(0deg);
                 opacity: 0;
             }
             10% {
                 opacity: 0.4;
             }
+            50% {
+                transform: translateY(50vh) translateX(var(--drift)) rotate(180deg);
+            }
             90% {
                 opacity: 0.4;
             }
             100% {
-                transform: translateY(-100vh) rotate(360deg);
+                transform: translateY(-10vh) translateX(calc(var(--drift) * 1.5)) rotate(360deg);
                 opacity: 0;
             }
         }
@@ -210,7 +213,7 @@
             
             // Array of your picture URLs - ADD YOUR PICTURE PATHS HERE
             const pictures = [
-               'photo 1.jpg',  // Replace with your actual image paths
+                'photo 1.jpg',  // Replace with your actual image paths
                 'photo 2.jpg',
                 'photo 3.jpg',
                 'photo 4.jpg',
@@ -221,7 +224,7 @@
                 'photo 9.jpg'
             ];
             
-            for (let i = 0; i < 8; i++) {
+            for (let i = 0; i < 9; i++) {
                 const heartFrame = document.createElement('div');
                 heartFrame.className = 'heart-frame';
                 
@@ -234,9 +237,18 @@
                 // Random positioning and sizing
                 heartFrame.style.left = Math.random() * 100 + '%';
                 heartFrame.style.animationDelay = Math.random() * 10 + 's';
+                
+                // Random animation duration between 12-20 seconds
+                const duration = 12 + Math.random() * 8;
+                heartFrame.style.animationDuration = duration + 's';
+                
                 const size = 250; // 250px hearts
                 heartFrame.style.width = size + 'px';
                 heartFrame.style.height = size + 'px';
+                
+                // Add random horizontal drift
+                const driftDistance = (Math.random() - 0.5) * 300; // Random drift between -150px and 150px
+                heartFrame.style.setProperty('--drift', driftDistance + 'px');
                 
                 heartBg.appendChild(heartFrame);
             }
